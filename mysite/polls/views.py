@@ -2,9 +2,16 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from .models import  Choice, Question 
 from .models import Noticia 
+
+
+class DetailView(generic.DetailView):
+    model = Noticia
+    template_name = 'postList.html'
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -15,9 +22,6 @@ class IndexView(generic.ListView):
         return Question.objects.order_by('-pub_date')[:5]
 
 
-class DetailView(generic.DetailView):
-    model = Noticia
-    template_name = 'polls/detail.html'
 
 
 
